@@ -1,421 +1,725 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deux — AI Receptionists for Home Service Businesses</title>
-<meta name="description" content="Deux builds AI receptionists for HVAC, plumbing, and electrical businesses. Every call answered, every lead qualified, every job booked — 24/7.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deux Agency | Less purchasing admin for contractors</title>
+<meta name="description" content="Deux helps commercial contractors cut the busywork in purchasing, from the field request to the matched invoice.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231B2A41'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-weight='700' font-size='19' text-anchor='middle' fill='%23EDEFEA'%3ED%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#ffffff;          /* page background (was dark) */
-    --ink-2:#f4f7fb;        /* alternating section bg */
-    --panel:#ffffff;        /* card surfaces */
-    --panel-line:#e2e8f2;   /* borders */
-    --amber:#1f6feb;        /* primary accent (now blue) */
-    --amber-soft:#3d85f5;   /* accent hover */
-    --paper:#0f1b2d;        /* primary text (dark ink on light) */
-    --muted:#5a6b82;        /* secondary text */
-    --muted-2:#8494a8;      /* tertiary text */
-    --red:#e5484d;
-    --green:#2fa968;
-    --maxw:1120px;
-    --display:'Barlow Semi Condensed',system-ui,sans-serif;
-    --body:'Inter',system-ui,sans-serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--ink);
-    color:var(--paper);
-    font-family:var(--body);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-
-  /* ---------- NAV ---------- */
-  nav{
-    position:sticky;top:0;z-index:50;
-    background:rgba(255,255,255,.85);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--panel-line);
-  }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
-  .brand{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:800;font-size:23px;letter-spacing:.02em}
-  .brand .mark{
-    width:30px;height:30px;border-radius:7px;
-    background:linear-gradient(150deg,var(--amber),#0b4fc4);
-    display:grid;place-items:center;color:#fff;font-weight:800;font-size:17px;
-    box-shadow:0 4px 16px rgba(31,111,235,.32);
-  }
-  .nav-cta{
-    font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.02em;
-    padding:9px 18px;border:1px solid var(--panel-line);border-radius:8px;
-    color:var(--paper);transition:.2s;
-  }
-  .nav-cta:hover{border-color:var(--amber);color:var(--amber)}
-  @media(max-width:560px){.nav-cta{display:none}}
-
-  /* ---------- HERO ---------- */
-  .hero{position:relative;padding:88px 0 70px;overflow:hidden}
-  .hero::before{
-    content:"";position:absolute;inset:0;
-    background:
-      radial-gradient(700px 320px at 78% 12%,rgba(31,111,235,.10),transparent 60%),
-      radial-gradient(600px 400px at 8% 90%,rgba(31,111,235,.05),transparent 55%);
-    pointer-events:none;
-  }
-  .hero-grid{
-    position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;
-  }
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:9px;
-    font-family:var(--display);font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-    font-size:12.5px;color:var(--amber);margin-bottom:22px;
-  }
-  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px rgba(31,111,235,.6);animation:pulse 2s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-  h1{
-    font-family:var(--display);font-weight:800;line-height:.98;letter-spacing:-.01em;
-    font-size:clamp(42px,6.2vw,68px);margin-bottom:22px;
-  }
-  h1 .hl{color:var(--amber);position:relative;white-space:nowrap}
-  .lede{font-size:19px;color:var(--muted);max-width:33ch;margin-bottom:34px}
-  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-  .btn{
-    font-family:var(--display);font-weight:700;letter-spacing:.02em;font-size:16.5px;
-    padding:15px 28px;border-radius:10px;transition:.2s;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:none;
-  }
-  .btn-primary{background:var(--amber);color:#fff;box-shadow:0 8px 24px -8px rgba(31,111,235,.5)}
-  .btn-primary:hover{background:var(--amber-soft);transform:translateY(-2px)}
-  .btn-ghost{color:var(--paper);border:1px solid var(--panel-line);background:transparent}
-  .btn-ghost:hover{border-color:var(--muted)}
-  .trust{margin-top:26px;font-size:14px;color:var(--muted-2);display:flex;align-items:center;gap:8px}
-
-  /* ---------- HERO PHONE PANEL ---------- */
-  .device{
-    position:relative;background:var(--ink-2);border:1px solid var(--panel-line);border-radius:18px;
-    padding:20px;box-shadow:0 30px 60px -28px rgba(15,27,45,.22);
-  }
-  .device-label{
-    display:flex;align-items:center;justify-content:space-between;
-    font-family:var(--display);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);
-    margin-bottom:16px;padding:0 4px;
-  }
-  .call{
-    display:flex;align-items:center;gap:14px;padding:16px;border-radius:12px;margin-bottom:12px;
-    border:1px solid var(--panel-line);background:var(--panel);position:relative;
-  }
-  .call .avatar{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;flex-shrink:0}
-  .call .who{font-family:var(--display);font-weight:600;font-size:16.5px}
-  .call .sub{font-size:13px;color:var(--muted)}
-  .call .stamp{margin-left:auto;font-size:12px;font-family:var(--display);letter-spacing:.05em;padding:5px 10px;border-radius:20px;font-weight:600}
-  .call.missed .avatar{background:rgba(255,90,82,.14);color:var(--red)}
-  .call.missed{border-color:rgba(255,90,82,.28)}
-  .call.missed .stamp{background:rgba(255,90,82,.14);color:var(--red)}
-  .call.missed .sub{color:var(--red);opacity:.85}
-  .call.won .avatar{background:rgba(74,208,127,.14);color:var(--green)}
-  .call.won{border-color:rgba(47,169,104,.4);box-shadow:0 0 0 1px rgba(47,169,104,.12),0 10px 26px -14px rgba(47,169,104,.35)}
-  .call.won .stamp{background:rgba(74,208,127,.15);color:var(--green)}
-  .call.won .sub{color:var(--green);opacity:.9}
-  .divider-tag{
-    text-align:center;font-family:var(--display);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--muted-2);margin:14px 0;position:relative;
-  }
-  .divider-tag::before,.divider-tag::after{content:"";position:absolute;top:50%;width:calc(50% - 70px);height:1px;background:var(--panel-line)}
-  .divider-tag::before{left:0}.divider-tag::after{right:0}
-  .ico{width:20px;height:20px;stroke-width:2;fill:none;stroke:currentColor}
-
-  /* ---------- STAT STRIP ---------- */
-  .strip{border-top:1px solid var(--panel-line);border-bottom:1px solid var(--panel-line);background:var(--ink-2)}
-  .strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-  .stat{padding:34px 28px;border-right:1px solid var(--panel-line)}
-  .stat:last-child{border-right:none}
-  .stat .num{font-family:var(--display);font-weight:800;font-size:40px;color:var(--amber);line-height:1}
-  .stat .cap{font-size:14.5px;color:var(--muted);margin-top:8px}
-  @media(max-width:680px){.strip-grid{grid-template-columns:1fr}.stat{border-right:none;border-bottom:1px solid var(--panel-line)}.stat:last-child{border-bottom:none}}
-
-  /* ---------- SECTION SHELL ---------- */
-  section.block{padding:92px 0}
-  .sec-eyebrow{font-family:var(--display);font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:var(--amber);margin-bottom:16px}
-  h2{font-family:var(--display);font-weight:800;font-size:clamp(31px,4.4vw,46px);line-height:1.03;letter-spacing:-.01em;margin-bottom:18px}
-  .sec-lede{font-size:18px;color:var(--muted);max-width:52ch}
-
-  /* ---------- PROBLEM ---------- */
-  .problem{background:var(--ink-2);border-top:1px solid var(--panel-line);border-bottom:1px solid var(--panel-line)}
-  .prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
-  .prob-list{list-style:none;margin-top:6px}
-  .prob-list li{display:flex;gap:15px;padding:17px 0;border-bottom:1px solid var(--panel-line);font-size:16.5px}
-  .prob-list li:last-child{border-bottom:none}
-  .prob-list .x{color:var(--red);flex-shrink:0;margin-top:2px}
-  .cost-card{
-    background:linear-gradient(160deg,#eef3fb,#ffffff);
-    border:1px solid var(--panel-line);border-radius:16px;padding:34px;
-    box-shadow:0 20px 44px -30px rgba(15,27,45,.25);
-  }
-  .cost-card .big{font-family:var(--display);font-weight:800;font-size:clamp(44px,7vw,64px);color:var(--paper);line-height:1}
-  .cost-card .big span{color:var(--red)}
-  .cost-card .note{color:var(--muted);margin-top:14px;font-size:15.5px}
-
-  /* ---------- HOW ---------- */
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
-  .step{
-    background:var(--panel);border:1px solid var(--panel-line);border-radius:14px;padding:30px 26px;position:relative;
-    transition:.25s;
-  }
-  .step:hover{border-color:rgba(31,111,235,.4);transform:translateY(-4px)}
-  .step .n{
-    font-family:var(--display);font-weight:800;font-size:15px;color:var(--ink);
-    background:var(--amber);width:34px;height:34px;border-radius:9px;display:grid;place-items:center;margin-bottom:20px;
-  }
-  .step h3{font-family:var(--display);font-weight:700;font-size:21px;margin-bottom:10px}
-  .step p{color:var(--muted);font-size:15.5px}
-  .step .line{position:absolute;top:47px;right:-22px;width:22px;height:2px;background:var(--panel-line);z-index:1}
-  .step:last-child .line{display:none}
-  @media(max-width:760px){.steps{grid-template-columns:1fr}.step .line{display:none}}
-
-  /* ---------- BENEFITS ---------- */
-  .bene{background:var(--ink-2);border-top:1px solid var(--panel-line);border-bottom:1px solid var(--panel-line)}
-  .bene-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:44px}
-  .bcard{background:var(--panel);border:1px solid var(--panel-line);border-radius:13px;padding:26px}
-  .bcard .bico{width:44px;height:44px;border-radius:11px;background:rgba(31,111,235,.10);color:var(--amber);display:grid;place-items:center;margin-bottom:16px}
-  .bcard h3{font-family:var(--display);font-weight:700;font-size:19.5px;margin-bottom:7px}
-  .bcard p{color:var(--muted);font-size:15px}
-  @media(max-width:640px){.bene-grid{grid-template-columns:1fr}.prob-grid{grid-template-columns:1fr}}
-
-  /* ---------- TRADES ---------- */
-  .trades{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
-  .trade{
-    font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:.03em;
-    padding:12px 22px;border:1px solid var(--panel-line);border-radius:30px;color:var(--paper);
-    display:flex;align-items:center;gap:10px;
-  }
-  .trade .tdot{width:8px;height:8px;border-radius:50%;background:var(--amber)}
-
-  /* ---------- FINAL CTA ---------- */
-  .final{position:relative;overflow:hidden}
-  .final::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 340px at 50% 0%,rgba(31,111,235,.10),transparent 62%)}
-  .final-card{
-    position:relative;text-align:center;background:var(--ink-2);border:1px solid var(--panel-line);
-    border-radius:22px;padding:64px 40px;
-  }
-  .final-card h2{margin-bottom:16px}
-  .final-card .sec-lede{margin:0 auto 32px}
-  .final-mail{margin-top:22px;font-family:var(--display);letter-spacing:.03em;color:var(--muted);font-size:15px}
-  .final-mail a{color:var(--amber)}
-
-  /* ---------- FOOTER ---------- */
-  footer{border-top:1px solid var(--panel-line);padding:34px 0;background:var(--ink)}
-  .foot-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-  .foot-brand{font-family:var(--display);font-weight:800;font-size:20px}
-  .foot-brand span{color:var(--amber)}
-  .foot-note{color:var(--muted-2);font-size:13.5px}
-
-  @media(max-width:860px){
-    .hero-grid{grid-template-columns:1fr;gap:44px}
-    .lede{max-width:none}
-    .prob-grid{gap:34px}
+  :root {
+    --paper: #EDEFEA;
+    --paper-deep: #E3E6DF;
+    --ink: #1B2A41;
+    --ink-soft: #4B5769;
+    --rule: rgba(27, 42, 65, 0.18);
+    --grid: rgba(27, 42, 65, 0.05);
+    --ochre: #C9A24A;
+    --ochre-wash: rgba(214, 176, 86, 0.42);
+    --gutter: clamp(20px, 5vw, 64px);
   }
 
-  @media(prefers-reduced-motion:reduce){
-    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: var(--ink);
+    font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    font-variation-settings: "wdth" 100;
   }
-  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+
+  a { color: inherit; }
+
+  a:focus-visible,
+  .button:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  .skip {
+    position: absolute;
+    left: -9999px;
+  }
+  .skip:focus {
+    left: 16px;
+    top: 16px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8px 12px;
+    z-index: 10;
+  }
+
+  /* The drawing sheet */
+  .sheet {
+    max-width: 1180px;
+    margin: clamp(10px, 2.5vw, 28px) auto;
+    border: 1.5px solid var(--ink);
+    padding: 6px;
+    background: rgba(237, 239, 234, 0.72);
+    position: relative;
+  }
+  .zones { display: none; }
+  @media (min-width: 1000px) {
+    .sheet { margin-top: 40px; margin-left: auto; margin-right: auto; }
+    .zones {
+      display: flex;
+      position: absolute;
+      color: var(--ink-soft);
+      font-size: 0.72rem;
+      font-weight: 600;
+      pointer-events: none;
+    }
+    .zones span { flex: 1; text-align: center; position: relative; }
+    .zones.top { left: 0; right: 0; top: -24px; }
+    .zones.top span + span::before {
+      content: ""; position: absolute; left: 0; top: 4px; height: 10px; width: 1px; background: var(--rule);
+    }
+    .zones.side { flex-direction: column; top: 0; bottom: 0; left: -22px; width: 14px; }
+    .zones.side span { display: flex; align-items: center; justify-content: center; }
+    .zones.side span + span::before {
+      content: ""; position: absolute; top: 0; left: 2px; width: 10px; height: 1px; background: var(--rule);
+    }
+  }
+  .frame {
+    border: 1px solid var(--rule);
+  }
+
+  /* Header */
+  .masthead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px var(--gutter);
+    border-bottom: 1px solid var(--rule);
+  }
+  .wordmark {
+    font-size: 1.35rem;
+    font-weight: 800;
+    font-variation-settings: "wdth" 125;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+  }
+  .masthead nav a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-underline-offset: 4px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: clamp(56px, 10vw, 120px) var(--gutter) clamp(48px, 8vw, 96px);
+  }
+  .hero h1 {
+    margin: 0;
+    max-width: 14em;
+    font-size: clamp(2.9rem, 8.4vw, 6.9rem);
+    line-height: 0.96;
+    font-weight: 800;
+    font-variation-settings: "wdth" 66;
+    letter-spacing: -0.015em;
+  }
+  .hero-copy p {
+    max-width: 34em;
+    margin: 28px 0 36px;
+    font-size: clamp(1.08rem, 1.6vw, 1.25rem);
+    color: var(--ink-soft);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 22px;
+  }
+  .button {
+    display: inline-block;
+    padding: 14px 26px;
+    background: var(--ochre);
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .button:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+  .button:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--ink); }
+  .address {
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+  }
+
+  /* Hero layout with the marked-up request */
+  .hero {
+    display: grid;
+    gap: clamp(44px, 6vw, 72px);
+    align-items: center;
+  }
+  @media (min-width: 1000px) {
+    .hero { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+    .hero h1 { font-size: clamp(3.4rem, 5.5vw, 5.4rem); max-width: none; }
+  }
+
+  .detail { margin: 0; }
+  .sheetlet {
+    border: 1.5px solid var(--ink);
+    background: #F6F7F3;
+    padding: clamp(18px, 2.4vw, 28px);
+    box-shadow: 8px 8px 0 rgba(27, 42, 65, 0.12);
+  }
+  .msg-meta {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+  }
+  .bubble {
+    margin: 0;
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    border-radius: 16px 16px 16px 4px;
+    padding: 14px 16px;
+    font-size: clamp(1.02rem, 1.35vw, 1.18rem);
+    line-height: 1.75;
+  }
+  .nw { white-space: nowrap; }
+  .hl {
+    background: var(--ochre-wash);
+    padding: 1px 3px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .tag {
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 20px;
+    margin: 0 2px 0 4px;
+    vertical-align: 2px;
+    background: var(--ochre);
+    color: var(--ink);
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1;
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  }
+  .keynotes {
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 16px 0 0;
+    border-top: 1px dashed var(--rule);
+    display: grid;
+    gap: 10px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  .keynotes li {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    align-items: start;
+  }
+  .keynotes .tag { margin: 0; vertical-align: 0; }
+  .retype {
+    margin: 16px 0 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    font-weight: 700;
+    font-size: 0.98rem;
+  }
+  .detail figcaption {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .detail figcaption .callout {
+    display: inline-grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 0.85rem;
+    flex: none;
+  }
+  .detail figcaption strong {
+    display: block;
+    font-size: 0.98rem;
+    line-height: 1.2;
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: 3px;
+    font-variation-settings: "wdth" 85;
+  }
+  .detail figcaption small {
+    display: block;
+    color: var(--ink-soft);
+    font-size: 0.8rem;
+    margin-top: 3px;
+  }
+
+  /* Shared section shell */
+  .band {
+    padding: clamp(48px, 8vw, 96px) var(--gutter);
+    border-top: 1px solid var(--rule);
+  }
+  .band h2 {
+    margin: 0 0 14px;
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    line-height: 1.08;
+    font-weight: 700;
+    font-variation-settings: "wdth" 78;
+  }
+  .lede {
+    max-width: 36em;
+    margin: 0 0 clamp(36px, 5vw, 56px);
+    color: var(--ink-soft);
+  }
+
+  /* Navy blueprint bands */
+  .blueprint {
+    background-color: var(--ink);
+    background-image:
+      linear-gradient(rgba(237, 239, 234, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237, 239, 234, 0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: var(--paper);
+    border-top-color: var(--ink);
+  }
+  .blueprint .lede,
+  .blueprint .address { color: rgba(237, 239, 234, 0.74); }
+  .blueprint .button { box-shadow: 4px 4px 0 var(--paper); border-color: var(--paper); }
+  .blueprint .button:hover { box-shadow: 2px 2px 0 var(--paper); }
+  .blueprint .button:focus-visible,
+  .blueprint a:focus-visible { outline-color: var(--paper); }
+
+  /* Purchasing chain */
+  .chain {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr auto 1fr auto 1fr auto 1fr auto;
+    align-items: start;
+  }
+  .stop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-width: 64px;
+  }
+  .stop .mark {
+    width: 22px;
+    height: 22px;
+    border: 2.5px solid var(--paper);
+    border-radius: 50%;
+    background: var(--ink);
+    position: relative;
+    z-index: 1;
+  }
+  .stop .name {
+    font-weight: 700;
+    font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+    font-variation-settings: "wdth" 80;
+    white-space: nowrap;
+  }
+  .gap {
+    position: relative;
+    padding: 70px 14px 0;
+    text-align: center;
+    font-size: 0.92rem;
+    line-height: 1.4;
+    color: rgba(237, 239, 234, 0.78);
+  }
+  .gap::before,
+  .gap::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    transform-origin: left center;
+  }
+  .gap::before {
+    top: 10px;
+    height: 2px;
+    background: var(--paper);
+    animation: draw-x 0.45s ease-out both;
+    animation-delay: calc(var(--i) * 0.28s);
+  }
+  .gap::after {
+    top: 2px;
+    height: 18px;
+    background: rgba(222, 186, 98, 0.82);
+    animation: mark 0.4s ease-out both;
+    animation-delay: calc(var(--i) * 0.28s + 1.6s);
+  }
+
+  @keyframes draw-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes draw-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes mark { from { opacity: 0; transform: scaleX(0.2); } to { opacity: 1; transform: scaleX(1); } }
+  @keyframes mark-y { from { opacity: 0; transform: scaleY(0.2); } to { opacity: 1; transform: scaleY(1); } }
+
+
+  /* How we work */
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .steps li {
+    padding: 28px 28px 32px 0;
+  }
+  .steps li + li {
+    padding-left: 28px;
+    border-left: 1px solid var(--rule);
+  }
+  .steps .num {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    background: var(--ochre);
+    font-weight: 800;
+    font-size: 1.15rem;
+    margin-bottom: 18px;
+  }
+  .steps h3 {
+    margin: 0 0 8px;
+    font-size: 1.22rem;
+    line-height: 1.2;
+    font-variation-settings: "wdth" 85;
+  }
+  .steps p {
+    margin: 0;
+    color: var(--ink-soft);
+    max-width: 30em;
+  }
+
+  .principle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px clamp(28px, 5vw, 64px);
+    margin-top: clamp(32px, 4vw, 48px);
+  }
+  .principle p { margin: 0; max-width: 34em; }
+  .principle strong { font-weight: 700; }
+  .also { color: var(--ink-soft); }
+
+  /* About */
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    gap: 20px clamp(28px, 5vw, 64px);
+    align-items: start;
+  }
+  .about-grid h2 { margin: 0; }
+  .about-grid p { margin: 0 0 14px; max-width: 36em; }
+  .about-grid .led {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 700;
+    font-variation-settings: "wdth" 85;
+    margin-bottom: 18px;
+  }
+  .expect-title {
+    margin: 32px 0 6px;
+    font-size: 1.05rem;
+    font-variation-settings: "wdth" 85;
+  }
+  .expect {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .expect li {
+    position: relative;
+    padding: 14px 0 14px 30px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-soft);
+  }
+  .expect li strong { color: var(--ink); }
+  .expect li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 21px;
+    width: 14px;
+    height: 10px;
+    background: var(--ochre);
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  }
+
+  /* Contact */
+  .contact h2 { font-size: clamp(1.9rem, 4vw, 3.1rem); }
+  .contact h2 {
+    max-width: 16em;
+  }
+
+  /* Title block footer */
+  .titleblock {
+    display: grid;
+    grid-template-columns: 1.4fr 1.6fr 1.6fr 0.8fr;
+    border-top: 1.5px solid var(--ink);
+  }
+  .titleblock div {
+    padding: 12px 16px 14px;
+    border-right: 1px solid var(--rule);
+    min-width: 0;
+  }
+  .titleblock div:last-child { border-right: 0; }
+  .titleblock dt {
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+    margin-bottom: 2px;
+  }
+  .titleblock dd {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+  .titleblock .project dd {
+    font-weight: 800;
+    font-variation-settings: "wdth" 125;
+  }
+
+  /* Tablet and phone */
+  @media (max-width: 860px) {
+    .chain {
+      grid-template-columns: 1fr;
+    }
+    .stop {
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+    }
+    .gap {
+      padding: 14px 0 18px 38px;
+      text-align: left;
+      min-height: 56px;
+    }
+    .gap::before,
+    .gap::after {
+      left: auto;
+      right: auto;
+      transform-origin: center top;
+    }
+    .gap::before {
+      top: -2px;
+      bottom: -2px;
+      left: 10px;
+      width: 2px;
+      height: auto;
+      animation-name: draw-y;
+    }
+    .gap::after {
+      top: -2px;
+      bottom: -2px;
+      left: 2px;
+      width: 18px;
+      height: auto;
+      animation-name: mark-y;
+    }
+
+    .steps { grid-template-columns: 1fr; }
+    .steps li,
+    .steps li + li {
+      padding: 24px 0 26px;
+      border-left: 0;
+    }
+    .steps li + li { border-top: 1px solid var(--rule); }
+
+    .principle,
+    .about-grid { grid-template-columns: 1fr; }
+
+    .titleblock { grid-template-columns: 1fr 1fr; }
+    .titleblock div:nth-child(2) { border-right: 0; }
+    .titleblock div:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+  }
+
+  @media (max-width: 420px) {
+    .sheet { padding: 4px; }
+    .titleblock { grid-template-columns: 1fr; }
+    .titleblock div { border-right: 0; border-bottom: 1px solid var(--rule); }
+    .titleblock div:last-child { border-bottom: 0; }
+  }
+
+  /* Large screens */
+  @media (min-width: 1440px) {
+    body { font-size: 1.15rem; }
+    .sheet { max-width: 1360px; }
+    .hero h1 { font-size: 6.2rem; }
+    .hero-copy p { font-size: 1.35rem; }
+    .band h2 { font-size: 2.9rem; }
+    .stop .name { font-size: 1.45rem; }
+    .gap { font-size: 1rem; }
+    .steps h3 { font-size: 1.35rem; }
+    .titleblock dd { font-size: 1.02rem; }
+  }
+  @media (min-width: 1800px) {
+    .sheet { max-width: 1520px; }
+    .hero h1 { font-size: 6.8rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gap::before,
+    .gap::after { animation: none; }
+    .button { transition: none; }
+  }
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<nav>
-  <div class="wrap nav-inner">
-    <div class="brand"><span class="mark">D</span>Deux</div>
-    <a href="#contact" class="nav-cta">Book a demo</a>
-  </div>
-</nav>
+<div class="sheet">
+  <div class="zones top" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div>
+  <div class="zones side" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span></div>
+  <div class="frame">
 
-<!-- HERO -->
-<header class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow"><span class="dot"></span>AI receptionists for the trades</span>
-      <h1>The call you miss is the job <span class="hl">they win.</span></h1>
-      <p class="lede">Deux answers every call for your HVAC, plumbing, or electrical business — qualifies the lead and books the job, 24/7. So a ringing phone stops meaning a lost customer.</p>
-      <div class="cta-row">
-        <a href="#contact" class="btn btn-primary">Book a 10-minute demo
-          <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="#how" class="btn btn-ghost">See how it works</a>
-      </div>
-      <div class="trust">
-        <svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px;color:var(--green)"><path d="M20 6 9 17l-5-5"/></svg>
-        Answers on the first ring — even at 2am, even mid-job.
-      </div>
-    </div>
+    <header class="masthead">
+      <a class="wordmark" href="#top" id="top">Deux</a>
+      <nav aria-label="Main">
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-    <!-- SIGNATURE: missed vs won call -->
-    <div class="device" aria-hidden="true">
-      <div class="device-label"><span>Incoming line</span><span>Today</span></div>
+    <main id="main">
 
-      <div class="call missed">
-        <div class="avatar">
-          <svg class="ico" viewBox="0 0 24 24"><path d="M2 4l20 16M22 4L2 20"/><path d="M6 9a15 15 0 0 0 3 3"/></svg>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+        <h1 id="hero-title">Less admin between the field, the office and your suppliers.</h1>
+        <p>Deux helps commercial contractors cut the busywork in purchasing, from the request on site to the matched invoice. We start by learning how your team works today.</p>
+        <div class="actions">
+          <a class="button" href="mailto:demin@deuxagency.org?subject=Purchasing%20at%20our%20company">Contact us</a>
+          <span class="address">demin@deuxagency.org</span>
         </div>
-        <div>
-          <div class="who">Unknown caller</div>
-          <div class="sub">Rang out · no answer</div>
         </div>
-        <div class="stamp">Missed</div>
-      </div>
 
-      <div class="divider-tag">With Deux</div>
+        <figure class="detail" aria-labelledby="detail-title">
+          <div class="sheetlet">
+            <p class="msg-meta">Text from site foreman, 6:42 am</p>
+            <p class="bubble">need <span class="nw"><span class="hl">40 sticks 3/4 EMT + couplings</span><span class="tag" aria-label="note 1">1</span></span> for <span class="nw"><span class="hl">level 3</span><span class="tag" aria-label="note 2">2</span></span> <span class="nw"><span class="hl">by thurs</span><span class="tag" aria-label="note 3">3</span></span></p>
+            <ol class="keynotes">
+              <li><span class="tag" aria-hidden="true">1</span>Which supplier, and at what price?</li>
+              <li><span class="tag" aria-hidden="true">2</span>Which job? Which cost code?</li>
+              <li><span class="tag" aria-hidden="true">3</span>Delivered to site, or picked up? Who approves it?</li>
+            </ol>
+            <p class="retype">Then someone retypes all of it into a purchase order.</p>
+          </div>
+          <figcaption>
+            <span class="callout" aria-hidden="true">1</span>
+            <span><strong id="detail-title">Typical material request</strong><small>Example for illustration</small></span>
+          </figcaption>
+        </figure>
+      </section>
 
-      <div class="call won">
-        <div class="avatar">
-          <svg class="ico" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7A2 2 0 0 1 22 16.9z"/></svg>
+      <section class="band blueprint" aria-labelledby="chain-title">
+        <h2 id="chain-title">Where purchasing time goes</h2>
+        <p class="lede">Every contractor buys a little differently, but the hours tend to disappear in the same places: the handoffs between one step and the next.</p>
+
+        <ol class="chain">
+          <li class="stop"><span class="mark" aria-hidden="true"></span><span class="name">Request</span></li>
+          <li class="gap" style="--i:0">Requests arrive by text, photo and phone call</li>
+          <li class="stop"><span class="mark" aria-hidden="true"></span><span class="name">Quote</span></li>
+          <li class="gap" style="--i:1">Quote details get retyped into the order</li>
+          <li class="stop"><span class="mark" aria-hidden="true"></span><span class="name">PO</span></li>
+          <li class="gap" style="--i:2">Orders wait on sign-off</li>
+          <li class="stop"><span class="mark" aria-hidden="true"></span><span class="name">Approval</span></li>
+          <li class="gap" style="--i:3">Someone chases suppliers for confirmations</li>
+          <li class="stop"><span class="mark" aria-hidden="true"></span><span class="name">Delivery</span></li>
+          <li class="gap" style="--i:4">Invoices get checked against orders by hand</li>
+          <li class="stop"><span class="mark" aria-hidden="true"></span><span class="name">Invoice</span></li>
+        </ol>
+
+      </section>
+
+      <section class="band" aria-labelledby="work-title">
+        <h2 id="work-title">How we work</h2>
+        <p class="lede">We don't arrive with a finished product to sell you. We find out what's slowing your purchasing down, then fix the part that matters most.</p>
+
+        <ol class="steps">
+          <li>
+            <span class="num" aria-hidden="true">1</span>
+            <h3>We learn how you buy today</h3>
+            <p>A short conversation about how requests come in, how orders get placed and where things slip.</p>
+          </li>
+          <li>
+            <span class="num" aria-hidden="true">2</span>
+            <h3>We test on your own documents</h3>
+            <p>Send a few sample requests or purchase orders, prices blacked out, and we show you what can be captured and checked automatically.</p>
+          </li>
+          <li>
+            <span class="num" aria-hidden="true">3</span>
+            <h3>We build only what saves time</h3>
+            <p>If it doesn't remove real hours or real mistakes, we don't build it. It's designed to work alongside the software you already use.</p>
+          </li>
+        </ol>
+
+        <div class="principle">
+          <p><strong>Your team keeps every decision.</strong> Nothing gets ordered or approved without a person signing off.</p>
+          <p class="also">We also take on wider AI implementation and consulting work for contractors and service businesses.</p>
         </div>
-        <div>
-          <div class="who">New job — booked</div>
-          <div class="sub">Qualified &amp; on the calendar</div>
-        </div>
-        <div class="stamp">Won</div>
-      </div>
-    </div>
-  </div>
-</header>
+      </section>
 
-<!-- STAT STRIP -->
-<div class="strip">
-  <div class="wrap strip-grid">
-    <div class="stat"><div class="num">24/7</div><div class="cap">Every call answered — nights, weekends, and while you're on the job.</div></div>
-    <div class="stat"><div class="num">&lt;1 ring</div><div class="cap">Picked up before a caller has a chance to hang up and dial the next name.</div></div>
-    <div class="stat"><div class="num">0</div><div class="cap">Voicemails a customer has to leave to get a callback that may never come.</div></div>
+      <section class="band" aria-labelledby="about-title">
+        <div class="about-grid">
+          <h2 id="about-title">About Deux</h2>
+          <div>
+            <p class="led">Deux is led by Demin Evans.</p>
+            <p>We're a small, focused agency working with commercial contractors on one problem: the admin that builds up around buying materials.</p>
+            <p>From the first call to the finished build, you're talking to the people doing the work.</p>
+            <p>We work research-first. We'd rather understand how one contractor actually buys materials than sell a tool that doesn't fit the way your team works.</p>
+            <h3 class="expect-title">What you can expect</h3>
+            <ul class="expect">
+              <li><strong>Straight answers.</strong> If automation won't help your process, we'll tell you.</li>
+              <li><strong>Your setup first.</strong> We start from the software, suppliers and habits you already have.</li>
+              <li><strong>Small before big.</strong> We prove it on a handful of real orders before it touches your whole process.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="band blueprint contact" id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">If ordering takes more of your week than it should, we'd like to hear how it works for you.</h2>
+        <p class="lede">Fifteen minutes is enough to start.</p>
+        <div class="actions">
+          <a class="button" href="mailto:demin@deuxagency.org?subject=Purchasing%20at%20our%20company">Contact us</a>
+          <span class="address">demin@deuxagency.org</span>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <dl class="titleblock">
+        <div class="project"><dt>&copy; 2026</dt><dd>Deux Agency</dd></div>
+        <div><dt>Scope</dt><dd>Purchasing, from request to invoice</dd></div>
+        <div><dt>Contact</dt><dd><a href="mailto:demin@deuxagency.org">demin@deuxagency.org</a></dd></div>
+        <div><dt>Sheet</dt><dd>1 of 1</dd></div>
+      </dl>
+    </footer>
+
   </div>
 </div>
-
-<!-- PROBLEM -->
-<section class="block problem">
-  <div class="wrap prob-grid">
-    <div>
-      <div class="sec-eyebrow">The real cost</div>
-      <h2>You can't answer with your hands full.</h2>
-      <p class="sec-lede" style="margin-bottom:8px">While you're under a sink, up a ladder, or driving to the next site, the phone keeps ringing. And a caller who hits voicemail doesn't wait around.</p>
-      <ul class="prob-list">
-        <li><span class="x">
-          <svg class="ico" viewBox="0 0 24 24" style="width:19px;height:19px"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
-        </span>The average caller won't leave a voicemail — they call your competitor instead.</li>
-        <li><span class="x">
-          <svg class="ico" viewBox="0 0 24 24" style="width:19px;height:19px"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
-        </span>After-hours emergencies are your best-paying jobs — and the ones most likely to go unanswered.</li>
-        <li><span class="x">
-          <svg class="ico" viewBox="0 0 24 24" style="width:19px;height:19px"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
-        </span>A dedicated receptionist costs thousands a month — and still goes home at five.</li>
-      </ul>
-    </div>
-    <div class="cost-card">
-      <div class="big">$300–$3,000</div>
-      <div class="big" style="font-size:clamp(20px,3vw,26px);color:var(--muted);margin-top:6px">walks out the door with<br>every <span style="color:var(--red)">missed call.</span></div>
-      <div class="note">One recovered job usually covers Deux for the month. Everything after that is money you were already losing.</div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="block" id="how">
-  <div class="wrap">
-    <div class="sec-eyebrow">How it works</div>
-    <h2>Three steps. No app for your customer to learn.</h2>
-    <p class="sec-lede">Your customers just call your number like they always have. Deux handles the rest and hands you a booked job.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="n">1</div>
-        <span class="line"></span>
-        <h3>The call comes in</h3>
-        <p>A customer dials your business line. Deux picks up instantly and greets them in a natural voice — no menus, no hold music.</p>
-      </div>
-      <div class="step">
-        <div class="n">2</div>
-        <span class="line"></span>
-        <h3>It qualifies &amp; books</h3>
-        <p>Deux asks the right questions for your trade, captures the details, checks your availability, and schedules the job straight into your calendar.</p>
-      </div>
-      <div class="step">
-        <div class="n">3</div>
-        <h3>You show up to work</h3>
-        <p>You get the booking and the customer's info — no phone tag, no note-taking. Just a job on the schedule, ready to run.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BENEFITS -->
-<section class="block bene">
-  <div class="wrap">
-    <div class="sec-eyebrow">Why crews choose Deux</div>
-    <h2>Built for the way you actually work.</h2>
-    <div class="bene-grid">
-      <div class="bcard">
-        <div class="bico"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-        <h3>Never off the clock</h3>
-        <p>Deux works nights, weekends, and holidays — capturing the emergency calls that pay the most and get missed the most.</p>
-      </div>
-      <div class="bcard">
-        <div class="bico"><svg class="ico" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4"/></svg></div>
-        <h3>Sounds like a person</h3>
-        <p>A natural, on-brand voice that talks like your best front-desk hire — not a robotic phone tree customers hang up on.</p>
-      </div>
-      <div class="bcard">
-        <div class="bico"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-        <h3>Books straight to your calendar</h3>
-        <p>Qualified jobs land on your schedule automatically, with the customer details you need to show up ready.</p>
-      </div>
-      <div class="bcard">
-        <div class="bico"><svg class="ico" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
-        <h3>Costs a fraction of a hire</h3>
-        <p>All the coverage of a full-time receptionist for a few hundred a month — with no sick days, no turnover, no training.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TRADES -->
-<section class="block" id="trades">
-  <div class="wrap">
-    <div class="sec-eyebrow">Made for your trade</div>
-    <h2>Tuned for home service work.</h2>
-    <p class="sec-lede">Deux knows the questions that matter for each trade — so it qualifies real jobs, not just takes messages. Purpose-built for solo operators up to growing crews.</p>
-    <div class="trades">
-      <span class="trade"><span class="tdot"></span>HVAC</span>
-      <span class="trade"><span class="tdot"></span>Plumbing</span>
-      <span class="trade"><span class="tdot"></span>Electrical</span>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="block final" id="contact">
-  <div class="wrap">
-    <div class="final-card">
-      <div class="sec-eyebrow" style="justify-content:center">See it before you commit</div>
-      <h2>Hear Deux handle a real call for your trade.</h2>
-      <p class="sec-lede">Book a quick 10-minute call. We'll walk you through exactly how Deux answers, qualifies, and books a job for a business like yours — no pressure, no setup on your end.</p>
-      <a href="mailto:damien@deuxagency.org?subject=Deux%20Demo%20Request" class="btn btn-primary" style="font-size:17.5px;padding:16px 34px">Book a 10-minute demo
-        <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <div class="final-mail">Or email us directly at <a href="mailto:damien@deuxagency.org">damien@deuxagency.org</a></div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap foot-inner">
-    <div class="foot-brand">Deux<span>.</span></div>
-    <div class="foot-note">AI receptionists for home service businesses · Every call answered, every job booked.</div>
-  </div>
-</footer>
-
 </body>
 </html>
